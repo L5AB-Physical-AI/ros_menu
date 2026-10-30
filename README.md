@@ -96,7 +96,7 @@ Please choose an option:
 
 # Configuration
 
-You can configure the menu easily by modify ~/ros_menu/config.yaml.
+You can configure the menu easily by modify ~/.ros_menu/config.yaml.
 The following are the options you can control.
 
 * Enable menu:

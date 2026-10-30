@@ -8,7 +8,7 @@ unset ROS_DISTRO
 unset ROS_HOSTNAME
 
 shell=`echo $SHELL | awk -F '/' '{print $NF}'`
-ros_menu_path="${HOME}/.ros_menu"
+ros_menu_path="${ROS_MENU_ROOT:-${HOME}/.ros_menu}"
 plugins_path="${ros_menu_path}/plugins_bashrc"
 
 function source_plugin()
@@ -48,7 +48,7 @@ function ros_menu_uninstall()
     read remove_menu
     if [ "$remove_menu" '==' "y" ] || [ "$remove_menu" '==' "Y" ];
     then
-        rm -rf ~/ros_menu ~/.ros_menu
+        rm -f "${HOME}/.ros_menu"
     fi
 }
 
@@ -70,13 +70,13 @@ function ros_menu_env()
 
 function ros_menu_disable()
 {
-    sed -i '/menu_enable/s/true/false/g' ~/ros_menu/config.yaml
+    sed -i '/menu_enable/s/true/false/g' "${ros_menu_path}/config.yaml"
     echo "To enable ros_menu please use ro_menu_enable"
 }
 
 function ros_menu_enable()
 {
-    sed -i '/menu_enable/s/false/true/g' ~/ros_menu/config.yaml
+    sed -i '/menu_enable/s/false/true/g' "${ros_menu_path}/config.yaml"
 }
 
 function ros_menu_clean_docker()
@@ -115,7 +115,7 @@ function ros_menu_help()
 
 if [ ! -f /.dockerenv ]; then
     rm -rf /tmp/host_sourcefile.txt
-    python3 ~/ros_menu/ros_menu.py ~/ros_menu/config.yaml
+    python3 "${ros_menu_path}/ros_menu.py" "${ros_menu_path}/config.yaml"
     if [ -f /tmp/host_sourcefile.txt ]; then
         source /tmp/host_sourcefile.txt
     fi

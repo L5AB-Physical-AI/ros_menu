@@ -128,7 +128,7 @@ if 'container' in source_file['Menu'][choose]:
     with open(host_sourcefilename, "w") as f:
         # Use $ROS_OPTION to select the environment in docker container
         # Use $CONTAINER to select which container to use
-        f.write('ROS_OPTION=%s CONTAINER=%s ~/ros_menu/scripts/docker_run.sh'
+        f.write('ROS_OPTION=%s CONTAINER=%s ~/.ros_menu/scripts/docker_run.sh'
                     % (ros_option, source_file['Menu'][choose]['container']))
 else:
     create_ros_sourcefile(host_sourcefilename)

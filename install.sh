@@ -60,7 +60,7 @@ else
 fi
 
 # Install ROS menu and config file
-if [ -f ~/ros_menu/config.yaml ]; then
+if [ -f "$(dirname "$(readlink -f "$0")")/config.yaml" ]; then
     echo  "The Neuron Startup Menu was already installed!"
     echo -n "Do you want to reinstall? (Your setting in the file config.yaml would be over written.) (y/N): "
     read over_write
